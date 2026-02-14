@@ -92,7 +92,7 @@ with st.form("filtres"):
                 for mot in mots:
                     pattern = re.escape(mot)
                     select = select[select["Texte"].str.contains(pattern, case=False, na=False)]
-
+        
         st.write(f"Lignes correspondantes : {select.shape[0]}")
 
         st.title('Résultats')
@@ -118,54 +118,55 @@ with st.form("filtres"):
                                 use_container_width=True)
                 
                 if mode_recherche.startswith("OU"):
-                    st.markdown(f"## Statistiques autour des mots choisis :")
+                    if mots_cles:
+                        st.markdown(f"## Statistiques autour des mots choisis :")
                     
-                    tableau, graph = st.columns([0.5, 0.5])
+                        tableau, graph = st.columns([0.5, 0.5])
 
-                    with tableau:
-                        stats = []
+                        with tableau:
+                            stats = []
 
-                        if mots:
-                            for mot in mots:
+                            if mots:
+                                for mot in mots:
 
-                                pattern = re.escape(mot)
+                                    pattern = re.escape(mot)
 
-                                # Nombre total d'occurrences
-                                total_occ = select["Texte"].str.count(pattern, flags=re.IGNORECASE).sum()
+                                    # Nombre total d'occurrences
+                                    total_occ = select["Texte"].str.count(pattern, flags=re.IGNORECASE).sum()
 
-                                # Versets contenant le mot
-                                versets_mask = select["Texte"].str.contains(pattern, case=False, na=False)
-                                nb_versets = versets_mask.sum()
+                                    # Versets contenant le mot
+                                    versets_mask = select["Texte"].str.contains(pattern, case=False, na=False)
+                                    nb_versets = versets_mask.sum()
 
-                                # Sourates concernées
-                                nb_sourates = select.loc[versets_mask, "index"].nunique()
+                                    # Sourates concernées
+                                    nb_sourates = select.loc[versets_mask, "index"].nunique()
 
-                                stats.append({
-                                    "Mot": mot,
-                                    "Nb de sourates": int(nb_sourates),
-                                    "Part": f"{round(int(nb_sourates) / 114 * 100, 2)} %",
-                                    "Nb de versets": int(nb_versets),
-                                    "Occurrences totales": int(total_occ)
-                                })
+                                    stats.append({
+                                        "Mot": mot,
+                                        "Nb de sourates": int(nb_sourates),
+                                        "Part": f"{round(int(nb_sourates) / 114 * 100, 2)} %",
+                                        "Nb de versets": int(nb_versets),
+                                        "Occurrences totales": int(total_occ)
+                                    })
 
-                            stats_df = pd.DataFrame(stats)
-                            st.dataframe(stats_df, use_container_width=True)
+                                stats_df = pd.DataFrame(stats)
+                                st.dataframe(stats_df, use_container_width=True)
 
-                            st.write("Interprétation :")
-                            st.write(f"Le mot {stats_df['Mot'].iloc[0]} est présent dans {stats_df['Nb de sourates'].iloc[0]} sourates, soit {stats_df['Part'].iloc[0]} des 114 sourates. Il apparait {stats_df['Occurrences totales'].iloc[0]} fois dans l'ensemble du Coran.")
-                        
-                        with graph:
+                                st.write("Interprétation :")
+                                st.write(f"Le mot {stats_df['Mot'].iloc[0]} est présent dans {stats_df['Nb de sourates'].iloc[0]} sourates, soit {stats_df['Part'].iloc[0]} des 114 sourates. Il apparait {stats_df['Occurrences totales'].iloc[0]} fois dans l'ensemble du Coran.")
+                            
+                            with graph:
 
-                            stats_df = stats_df.sort_values("Occurrences totales", ascending=True)
-                            fig, ax = plt.subplots(figsize=(4, 2))
+                                stats_df = stats_df.sort_values("Occurrences totales", ascending=True)
+                                fig, ax = plt.subplots(figsize=(4, 2))
 
-                            ax.barh(stats_df["Mot"], stats_df["Occurrences totales"])
+                                ax.barh(stats_df["Mot"], stats_df["Occurrences totales"])
 
-                            ax.set_title("Nombre total d'occurrences par mot")
+                                ax.set_title("Nombre total d'occurrences par mot")
 
-                            plt.tight_layout()
+                                plt.tight_layout()
 
-                            st.pyplot(fig)
+                                st.pyplot(fig)
 
             elif page == "📖 Lecture":
 
@@ -183,7 +184,6 @@ with st.form("filtres"):
                     st.markdown("---")
         else :
            print('\n --- Pas de résultat :( ---')
-
 
 
 
