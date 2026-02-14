@@ -15,7 +15,7 @@ with title1 :
     st.write("Source : Données récupérées depuis le site https://www.le-coran.com/ ; image : https://pxhere.com/fr/photo/618662")
 
     st.write("Mise à jour du 13/02/2025 : Première mise en ligne.")
-    st.write("Le mode Lecture offre une présentation en texte, confortable pour lire, tandis que le mode Recherche / Analyse présente les données sous forme de tableaux ainsi que des statistiques. Le mide Lecture est mis par defaut.")
+    st.write("Le mode Lecture offre une présentation en texte, confortable pour lire, tandis que le mode Recherche / Analyse présente les données sous forme de tableaux ainsi que des statistiques. Le mode Lecture est mis par defaut.")
 
 with title2 :
     st.image("image_Coran.jpg")
@@ -183,6 +183,7 @@ with st.form("filtres"):
                     st.markdown("---")
         else :
            print('\n --- Pas de résultat :( ---')
+
 
 
 
