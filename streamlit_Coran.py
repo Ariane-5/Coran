@@ -152,7 +152,7 @@ with st.form("filtres"):
                             st.dataframe(stats_df, use_container_width=True)
 
                             st.write("Interprétation :")
-                            st.write(f"Le mot {stats_df["Mot"].iloc[0]} est présent dans {stats_df["Nb de sourates"].iloc[0]} sourates, soit {stats_df["Part"].iloc[0]} des 114 sourates. Il apparait {stats_df["Occurrences totales"].iloc[0]} fois dans l'ensemble du Coran.")
+                            st.write(f"Le mot {stats_df['Mot'].iloc[0]} est présent dans {stats_df['Nb de sourates'].iloc[0]} sourates, soit {stats_df['Part'].iloc[0]} des 114 sourates. Il apparait {stats_df['Occurrences totales'].iloc[0]} fois dans l'ensemble du Coran.")
                         
                         with graph:
 
@@ -183,4 +183,5 @@ with st.form("filtres"):
                     st.markdown("---")
         else :
            print('\n --- Pas de résultat :( ---')
+
 
