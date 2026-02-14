@@ -8,24 +8,31 @@ import re
 import folium
 from branca.element import Figure
 
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 st.set_page_config(layout="wide")
 
 title1, title2 = st.columns([0.7, 0.3])
 
 with title1 :
-  st.title('Coran')
-  st.write("Outil de lecture, recherche et statistiques sur le Coran")
-  st.write("Source : Données récupérées depuis le site https://www.le-coran.com/ ; image : https://pxhere.com/fr/photo/618662")
-  
-  st.write("Mise à jour du 13/02/2025 : Première mise en ligne.")
-  st.write("Le mode Lecture offre une présentation en texte, confortable pour lire, tandis que le mode Recherche / Analyse présente les données sous forme de tableaux ainsi que des statistiques.")
+    st.title('Coran')
+    st.write("Outil de lecture, recherche et statistiques sur le Coran")
+    st.write("Source : Données récupérées depuis le site https://www.le-coran.com/ ; image : https://pxhere.com/fr/photo/618662")
+
+    st.write("Mise à jour du 13/02/2025 : Première mise en ligne.")
+    st.write("Le mode Lecture offre une présentation en texte, confortable pour lire, tandis que le mode Recherche / Analyse présente les données sous forme de tableaux ainsi que des statistiques.")
 
 with title2 :
-  st.image('image_Coran.jpg')
-  st.write('Julie')
+    image_path = os.path.join(BASE_DIR, "image_Coran.jpg")
+    st.image(image_path)
+
+    st.write('Julie')
 
 #Chargement du DataFrame étudié :
-df = pd.read_excel('Coran_sommaire.xlsx')
+df_path = os.path.join(BASE_DIR, "Coran_sommaire.xlsx")
+df = pd.read_excel(df_path)
+
 df["index"] = df["index"].astype(str)
 df["Num_verset"] = df["Num_verset"].astype(str)
 
