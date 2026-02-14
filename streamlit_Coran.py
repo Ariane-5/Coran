@@ -15,7 +15,7 @@ with title1 :
     st.write("Source : Données récupérées depuis le site https://www.le-coran.com/ ; image : https://pxhere.com/fr/photo/618662")
 
     st.write("Mise à jour du 13/02/2025 : Première mise en ligne.")
-    st.write("Le mode Lecture offre une présentation en texte, confortable pour lire, tandis que le mode Recherche / Analyse présente les données sous forme de tableaux ainsi que des statistiques.")
+    st.write("Le mode Lecture offre une présentation en texte, confortable pour lire, tandis que le mode Recherche / Analyse présente les données sous forme de tableaux ainsi que des statistiques. Le mide Lecture est mis par defaut.")
 
 with title2 :
     st.image("image_Coran.jpg")
@@ -37,7 +37,7 @@ fatiha = fatiha[["Num_verset", "Texte"]].set_axis(['Verset n°', 'Texte'], axis 
 for _, row in fatiha.iterrows():
     st.write(row["Verset n°"] + " - " + row["Texte"])
 
-page = st.sidebar.radio("Navigation",["🔎 Recherche / Analyse", "📖 Lecture"])
+page = st.sidebar.radio("Navigation",["📖 Lecture", "🔎 Recherche / Analyse"])
 
 st.title('Recherche de versets')
 
@@ -183,5 +183,6 @@ with st.form("filtres"):
                     st.markdown("---")
         else :
            print('\n --- Pas de résultat :( ---')
+
 
 
