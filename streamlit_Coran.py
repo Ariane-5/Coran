@@ -23,7 +23,7 @@ with title2 :
     st.write('Julie')
 
 #Chargement du DataFrame étudié :
-df = pd.read_excel("Coran_sommaire.xlsx")
+df = pd.read_csv("Coran_sommaire.csv", sep=";", encoding="utf-8-sig")
 
 df["index"] = df["index"].astype(str)
 df["Num_verset"] = df["Num_verset"].astype(str)
@@ -183,5 +183,4 @@ with st.form("filtres"):
                     st.markdown("---")
         else :
            print('\n --- Pas de résultat :( ---')
-
 
