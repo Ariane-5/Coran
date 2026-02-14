@@ -5,9 +5,6 @@ import matplotlib.pyplot as plt
 
 import re
 
-import folium
-from branca.element import Figure
-
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -191,3 +188,4 @@ with st.form("filtres"):
                     st.markdown("---")
         else :
            print('\n --- Pas de résultat :( ---')
+
