@@ -5,9 +5,6 @@ import matplotlib.pyplot as plt
 
 import re
 
-import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 st.set_page_config(layout="wide")
 
 title1, title2 = st.columns([0.7, 0.3])
@@ -21,14 +18,12 @@ with title1 :
     st.write("Le mode Lecture offre une présentation en texte, confortable pour lire, tandis que le mode Recherche / Analyse présente les données sous forme de tableaux ainsi que des statistiques.")
 
 with title2 :
-    image_path = os.path.join(BASE_DIR, "image_Coran.jpg")
-    st.image(image_path)
+    st.image("image_Coran.jpg")
 
     st.write('Julie')
 
 #Chargement du DataFrame étudié :
-df_path = os.path.join(BASE_DIR, "Coran_sommaire.xlsx")
-df = pd.read_excel(df_path)
+df = pd.read_excel("Coran_sommaire.xlsx")
 
 df["index"] = df["index"].astype(str)
 df["Num_verset"] = df["Num_verset"].astype(str)
@@ -188,4 +183,5 @@ with st.form("filtres"):
                     st.markdown("---")
         else :
            print('\n --- Pas de résultat :( ---')
+
 
