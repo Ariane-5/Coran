@@ -170,18 +170,29 @@ with st.form("filtres"):
 
             elif page == "📖 Lecture":
 
-                for sourate, groupe in select.groupby("Sourate"):
+                for sourate, groupe in select.groupby("Sourate", sort=False):
 
-                    st.markdown(f"## {sourate}")
+                    couleur = groupe["Code_Couleur"].iloc[0]
+
+                    # Titre coloré
+                    st.markdown(
+                        f"<h2 style='color:{couleur};'>{sourate}</h2>",
+                        unsafe_allow_html=True
+                    )
+
                     st.divider()
 
-                    # Tri correct des versets
                     groupe = groupe.sort_values("Num_verset", key=lambda x: x.astype(int))
 
                     for _, row in groupe.iterrows():
-                        st.markdown(f"**{row['Num_verset']} -** {row['Texte']}")
+                        st.markdown(
+                            f"<span style='color:{row['Code_Couleur']}; font-weight:bold;'>"
+                            f"{row['Num_verset']} -</span> {row['Texte']}",
+                            unsafe_allow_html=True
+                        )
 
                     st.markdown("---")
+
         else :
            print('\n --- Pas de résultat :( ---')
 
